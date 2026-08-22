@@ -1,0 +1,433 @@
+/*
+  The CSS in this style tag is based off of Bear Blog's default CSS.
+  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
+  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
+ */
+
+:root {
+	--accent: #6c94b5;
+	--accent-light: #9dc0da;
+	--accent-dark: #45657f;
+	--black: 244, 240, 236;
+	--gray: 154, 163, 178;
+	--gray-light: 40, 45, 56;
+	--gray-dark: 210, 214, 222;
+	--bg: #0b0d12;
+	--bg-elevated: #12151d;
+	--bg-elevated-2: #191d27;
+	--border: rgba(255, 255, 255, 0.08);
+	--gray-gradient: #0d1017, #0b0d12;
+	--box-shadow:
+		0 2px 6px rgba(0, 0, 0, 35%), 0 8px 24px rgba(0, 0, 0, 40%),
+		0 16px 32px rgba(0, 0, 0, 45%);
+}
+/* * {
+	background-color:var(--bg);
+} */
+
+html {
+	background-color: var(--bg);
+	zoom:1.1;
+}
+body {
+	font-family: var(--font-atkinson);
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	background-color:var(--bg);
+	background-size: 100% 600px;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	color: rgb(var(--gray-dark));
+	font-size: 18px;
+	line-height: 1.6;
+	overflow-x:hidden;
+}
+main {
+	width: 720px;
+	max-width: calc(100% - 2em);
+	margin: auto;
+	padding: .3em 1em 2em 1em;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0 0 0.4rem 0;
+	color: rgb(var(--black));
+	line-height: 1.2;
+}
+h1 {
+	font-size: 2.4em;
+}
+h2 {
+	font-size: 1.95em;
+}
+h3 {
+	font-size: 1.6em;
+}
+h4 {
+	font-size: 1.35em;
+}
+h5 {
+	font-size: 1.15em;
+}
+strong,
+b {
+	font-weight: 700;
+}
+a {
+	color: var(--accent-light);
+}
+a:hover {
+	color: var(--accent);
+}
+p {
+	margin-bottom: 1em;
+}
+.prose p {
+	margin-bottom: 1.1em;
+}
+textarea {
+	width: 100%;
+	font-size: 16px;
+}
+input {
+	font-size: 16px;
+}
+table {
+	width: 100%;
+}
+img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 8px;
+}
+code {
+	padding: 2px 5px;
+	background-color: var(--bg-elevated-2);
+	border: 1px solid var(--border);
+	border-radius: 4px;
+}
+pre {
+	padding: 1.5em;
+	border-radius: 8px;
+	background-color: var(--bg-elevated) !important;
+	border: 1px solid var(--border);
+}
+pre > code {
+	all: unset;
+}
+blockquote {
+	border-left: 4px solid var(--accent);
+	padding: 0 0 0 20px;
+	margin: 0;
+	font-size: 1.333em;
+}
+hr {
+	border: none;
+	border-top: 1px solid var(--border);
+}
+@media (max-width: 720px) {
+	body {
+		font-size: 16px;
+	}
+	main {
+		padding: 1em;
+	}
+}
+
+/* ---------- Layout widths ---------- */
+main.wide {
+	width: 960px;
+}
+main.post-main {
+	margin-top:.8em;
+	width: 960px;
+}
+
+/* ---------- Header ---------- */
+header {
+	margin: 0;
+	padding: 0 1em;
+	background: var(--bg-elevated);
+	border-bottom: 1px solid var(--border);
+}
+header h2 {
+	margin: 0;
+	font-size: 1em;
+}
+header h2 a,
+header h2 a.active {
+	text-decoration: none;
+}
+header nav {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	max-height:60px;
+	padding:0;
+}
+header nav a {
+	display: inline-block;
+	padding: 0.75em 0.5em;
+	color: var(--black);
+	border-bottom: 3px solid transparent;
+	text-decoration: none;
+}
+header nav a.active {
+	font-weight: bolder;
+	text-decoration: underline;
+	border-bottom-color: var(--accent);
+}
+header nav .internal-links {
+	display: flex;
+	justify-content: center;
+}
+@media (max-width: 720px) {
+	header nav .internal-links {
+		justify-content: end;
+	}
+}
+
+header .social-links,
+header .social-links a {
+	display: flex;
+	justify-content: end;
+}
+header .social-links a {
+	color: rgb(var(--gray-dark));
+	padding: 0.4em;
+}
+header .social-links a:hover {
+	color: var(--accent);
+}
+@media (max-width: 720px) {
+	header .social-links {
+		display: none;
+	}
+}
+
+/* ---------- Footer ---------- */
+footer {
+	padding: 1.5em 1em 2.5em 1em;
+	background: var(--bg);
+	border-top: 1px solid var(--border);
+	color: rgb(var(--gray));
+	text-align: center;
+	font-size: 0.9em;
+}
+footer .social-links {
+	display: flex;
+	justify-content: center;
+	gap: 0.75em;
+	margin-top: 0.75em;
+}
+footer .social-links a {
+	display: flex;
+	text-decoration: none;
+	color: rgb(var(--gray));
+}
+footer .social-links a:hover {
+	color: var(--accent);
+}
+
+/* ---------- Hero (landing + about) ---------- */
+.hero {
+	text-align: center;
+	padding: 1em 1em 2.25em 1em;
+}
+.hero .wave {
+	font-size: 4em;
+	margin: 0 0 0.1em 0;
+	transform-origin: 70% 70%;
+}
+.hero h1 {
+	margin-bottom: 0.3em;
+}
+.hero .tagline {
+	max-width: 540px;
+	font-size: 1.05em;
+	margin: 0 auto 1.3em auto;
+	color: rgb(var(--gray));
+}
+.cta {
+	display: flex;
+	justify-content: center;
+	gap: 0.75em;
+	flex-wrap: wrap;
+}
+.button {
+	display: inline-block;
+	padding: 0.65em 1.5em;
+	border-radius: 999px;
+	background: var(--accent);
+	color: #0d1620;
+	text-decoration: none;
+	font-weight: 700;
+	font-size: 0.95em;
+	border: 1px solid var(--accent);
+	transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.button:hover {
+	background: var(--accent-dark);
+	border-color: var(--accent-dark);
+	color: #0d1620;
+}
+.button.secondary {
+	background: transparent;
+	color: var(--accent-light);
+	border: 1px solid var(--accent);
+}
+.button.secondary:hover {
+	background: var(--accent);
+	color: #0d1620;
+	border-color: var(--accent);
+}
+@media (max-width: 720px) {
+	.hero {
+		padding: 1.25em 0 1.5em 0;
+	}
+}
+
+/* ---------- Post grid (landing + blog listing) ---------- */
+.posts-section {
+	padding: 0.75em 0;
+}
+.section-header {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	margin-bottom: 1em;
+}
+.section-header h2 {
+	margin: 0;
+	font-size: 1.6em;
+}
+.section-header a {
+	text-decoration: none;
+	color: var(--accent);
+	font-weight: 700;
+	font-size: 0.9em;
+	white-space: nowrap;
+}
+.section-header a:hover {
+	color: var(--accent-dark);
+}
+.page-title {
+	font-size: 1.8em;
+	margin-bottom: 0.75em;
+}
+.post-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+	gap: 1em;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+.post-grid li {
+	background: var(--bg-elevated);
+	border: 1px solid var(--border);
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: var(--box-shadow);
+	transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.post-grid li:hover {
+	transform: translateY(-3px);
+	border-color: var(--accent);
+}
+.post-grid li a {
+	display: block;
+	text-decoration: none;
+	padding-bottom: 0.6em;
+}
+.post-grid img {
+	display: block;
+	width: 100%;
+	aspect-ratio: 2 / 1;
+	object-fit: cover;
+	border-radius: 0;
+	margin-bottom: 0.5em;
+}
+.post-grid .title {
+	margin: 0 0.6em 0.1em 0.6em;
+	font-size: 1em;
+	color: rgb(var(--black));
+	line-height: 1.2;
+}
+.post-grid .date {
+	margin: 0 0.7em;
+	font-size: 0.8em;
+	color: rgb(var(--gray));
+}
+.post-grid li a:hover .title,
+.post-grid li a:hover .date {
+	color: var(--accent);
+}
+
+/* ---------- Single blog post ---------- */
+.post-hero-image {
+	width: 100%;
+}
+.post-hero-image img {
+	display: block;
+	width: 100%;
+	max-width: 600px;
+	margin: 0 auto;
+	border-radius: 12px;
+	box-shadow: var(--box-shadow);
+}
+.prose {
+	width: 680px;
+	max-width: calc(100% - 2em);
+	margin: auto;
+	padding: 0.75em 1em;
+	color: rgb(var(--gray-dark));
+	font-size: 0.95em;
+}
+.prose a {
+	color: var(--accent-light);
+}
+.prose a:hover {
+	color: var(--accent);
+}
+.post-heading {
+	margin-bottom: 0.5em;
+	padding: 0.5em 0;
+	text-align: center;
+	line-height: 1;
+}
+.post-heading h1 {
+	margin: 0 0 0.4em 0;
+	font-size: 2em;
+}
+.post-heading .date {
+	margin-bottom: 0.4em;
+	color: rgb(var(--gray));
+	font-size: 0.9em;
+}
+.last-updated-on {
+	font-style: italic;
+}
+
+.sr-only {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
+	clip: rect(1px 1px 1px 1px);
+	/* maybe deprecated but we need to support legacy browsers */
+	clip: rect(1px, 1px, 1px, 1px);
+	/* modern browsers, clip-path works inwards from each corner */
+	clip-path: inset(50%);
+	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
+	white-space: nowrap;
+}
