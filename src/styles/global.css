@@ -178,8 +178,8 @@ header nav a {
 	text-decoration: none;
 }
 header nav a.active {
-	font-weight: bolder;
-	text-decoration: underline;
+	/* font-weight: bolder; */
+	/* text-decoration: underline; */
 	border-bottom-color: var(--accent);
 }
 header nav .internal-links {
