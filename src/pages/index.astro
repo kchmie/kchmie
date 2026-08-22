@@ -29,8 +29,8 @@ const recentPosts = allPosts.slice(0, 4);
 					Computer Science student and software engineer passionate about local LLMs, automation, and security. Based in Poland.
 				</p>
 				<div class="cta">
-					<!-- <a class="button se" href="/blog">Read the blog</a>
-					<a class="button secondary" href="/about">About me</a> -->
+					<!-- <a class="button se" href={`${import.meta.env.BASE_URL}/blog`}>Read the blog</a>
+					<a class="button secondary" href={`${import.meta.env.BASE_URL}/about`}>About me</a> -->
 				</div>
 			</section>
 
@@ -43,7 +43,7 @@ const recentPosts = allPosts.slice(0, 4);
 						<ul class="post-grid">
 							{featuredPosts.map((post) => (!post.data.hidden &&
 								<li>
-									<a href={`/blog/${post.id}/`}>
+									<a href={`${import.meta.env.BASE_URL}/blog/${post.id}/`}>
 										{post.data.heroImage && (
 											<Image width={400} height={200} src={post.data.heroImage} alt="" />
 										)}
@@ -62,13 +62,13 @@ const recentPosts = allPosts.slice(0, 4);
 			<section class="posts-section">
 				<div class="section-header">
 					<h2>Recent posts</h2>
-					<a href="/blog">View all →</a>
+					<a href={`${import.meta.env.BASE_URL}/blog`}>View all →</a>
 				</div>
 				<ul class="post-grid">
 					{
 						recentPosts.map((post) => (!post.data.hidden &&
 							<li>
-								<a href={`/blog/${post.id}/`}>
+								<a href={`${import.meta.env.BASE_URL}/blog/${post.id}/`}>
 									{post.data.heroImage && (
 										<Image width={400} height={200} src={post.data.heroImage} alt="" />
 									)}
