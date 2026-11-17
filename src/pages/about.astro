@@ -1,27 +1,4 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import { SITE_TITLE } from '../consts';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+return Astro.redirect(`${base}/#about`);
 ---
-
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={`About - ${SITE_TITLE}`} description="A little more about me." />
-	</head>
-	<body>
-		<Header />
-		<main class="wide">
-			<section class="hero">
-				<p class="wave">🚧</p>
-				<h1>About me</h1>
-				<p class="tagline">This section is under construction - come back soon.</p>
-				<div class="cta">
-					<!-- <a class="button secondary" href={`${import.meta.env.BASE_URL}/blog`}>Check out the blog!</a> -->
-				</div>
-			</section>
-		</main>
-		<Footer />
-	</body>
-</html>

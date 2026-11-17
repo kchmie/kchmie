@@ -5,7 +5,9 @@ export const SITE_TITLE = 'kchmie';
 export const SITE_DESCRIPTION = 'Personal landing page and IT blog - notes on systems, code, and everything in between.';
 
 export const AUTHOR_NAME = 'Krzysztof';
+export const AUTHOR_FULL_NAME = 'Krzysztof Chmielewski';
 
 export const GITHUB_URL = 'https://github.com/kchmie';
+export const ITCH_URL = 'https://christhefrog.itch.io/';
 // Leave empty to hide the LinkedIn icon in the header/footer.
 export const LINKEDIN_URL = '';

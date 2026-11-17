@@ -1,0 +1,29 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import AmbientBackdrop from '../components/AmbientBackdrop.astro';
+import Icon from '../components/Icon.astro';
+import { AUTHOR_FULL_NAME, GITHUB_URL, ITCH_URL, LINKEDIN_URL, SITE_TITLE } from '../consts';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<!doctype html>
+<html lang="en" id="top">
+  <head><BaseHead title={`${AUTHOR_FULL_NAME} — Card`} description={`${AUTHOR_FULL_NAME} — Computer Science student & software engineer. Find my projects, blog, and links.`} /></head>
+  <body class="card-page">
+    <AmbientBackdrop tone="neutral" />
+    <main id="main-content" class="card-main">
+      <article class="profile-card" aria-labelledby="card-name">
+        <div class="card-monogram" aria-hidden="true">k<span>.</span></div>
+        <h1 id="card-name">{AUTHOR_FULL_NAME}</h1>
+        <p class="profile-description">CS student & software engineer.</p>
+        <p class="profile-location">Based in Poland.</p>
+        <nav class="card-links" aria-label="My links">
+          <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer"><Icon name="github" size={20} /><span>GitHub<small>Projects & experiments</small></span><Icon name="arrow-up-right" size={18} /></a>
+          <a href={ITCH_URL} target="_blank" rel="noopener noreferrer"><Icon name="gamepad" size={20} /><span>itch.io<small>Games</small></span><Icon name="arrow-up-right" size={18} /></a>
+          {LINKEDIN_URL && <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer"><Icon name="link" size={20} /><span>LinkedIn<small>Let's connect</small></span><Icon name="arrow-up-right" size={18} /></a>}
+          <a href={`${base}/`}><Icon name="code" size={20} /><span>Website<small>A little more about me</small></span><Icon name="arrow-up-right" size={18} /></a>
+        </nav>
+        <p class="profile-handle">@{SITE_TITLE}</p>
+      </article>
+    </main>
+  </body>
+</html>

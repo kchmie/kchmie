@@ -1,0 +1,40 @@
+---
+interface Props { tone?: 'green' | 'neutral'; }
+const { tone = 'green' } = Astro.props;
+---
+<ambient-backdrop class:list={[{ 'ambient-neutral': tone === 'neutral' }]} aria-hidden="true"></ambient-backdrop>
+<script>
+  class AmbientBackdrop extends HTMLElement {
+    private cleanup?: () => void;
+    connectedCallback() {
+      const controller = new AbortController();
+      const preference = matchMedia('(prefers-reduced-motion: no-preference)');
+      let frame = 0;
+      let x = innerWidth * .75;
+      let y = innerHeight * .3;
+      const paint = () => {
+        this.style.setProperty('--cursor-x', `${x}px`);
+        this.style.setProperty('--cursor-y', `${y}px`);
+        frame = 0;
+      };
+      window.addEventListener('pointermove', (event) => {
+        if (!preference.matches || event.pointerType === 'touch') return;
+        x = event.clientX;
+        y = event.clientY;
+        if (!frame) frame = requestAnimationFrame(paint);
+      }, { passive: true, signal: controller.signal });
+      const reset = () => {
+        cancelAnimationFrame(frame);
+        frame = 0;
+        this.style.removeProperty('--cursor-x');
+        this.style.removeProperty('--cursor-y');
+      };
+      document.documentElement.addEventListener('pointerleave', reset, { signal: controller.signal });
+      window.addEventListener('blur', reset, { signal: controller.signal });
+      preference.addEventListener('change', reset, { signal: controller.signal });
+      this.cleanup = () => { controller.abort(); cancelAnimationFrame(frame); };
+    }
+    disconnectedCallback() { this.cleanup?.(); }
+  }
+  if (!customElements.get('ambient-backdrop')) customElements.define('ambient-backdrop', AmbientBackdrop);
+</script>

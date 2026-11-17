@@ -1,0 +1,51 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import PostCard from './PostCard.astro';
+import Icon from './Icon.astro';
+interface Props { posts: CollectionEntry<'blog'>[]; }
+const { posts } = Astro.props;
+---
+<post-carousel role="region" aria-roledescription="carousel" aria-label="Recent posts">
+  {posts.length > 0 ? <div id="recent-posts" class="carousel-track" tabindex="0" aria-label="Scroll through posts">{posts.map((post) => <PostCard post={post} />)}</div> : <p class="empty-state">New notes coming soon.</p>}
+  {posts.length > 1 && <div class="carousel-controls"><span class="carousel-position" aria-live="polite" aria-atomic="true">1 / {posts.length}</span><button type="button" data-direction="previous" aria-label="Previous post" aria-controls="recent-posts" disabled><Icon name="arrow-left" size={19} /></button><button type="button" data-direction="next" aria-label="Next post" aria-controls="recent-posts"><Icon name="arrow-right" size={19} /></button></div>}
+</post-carousel>
+<script>
+  class PostCarousel extends HTMLElement {
+    private cleanup?: () => void;
+    connectedCallback() {
+      const track = this.querySelector<HTMLElement>('.carousel-track');
+      const previous = this.querySelector<HTMLButtonElement>('[data-direction="previous"]');
+      const next = this.querySelector<HTMLButtonElement>('[data-direction="next"]');
+      const position = this.querySelector('.carousel-position');
+      if (!track || !previous || !next || !position) return;
+      const controller = new AbortController();
+      const options = { signal: controller.signal };
+      const cards = Array.from(track.querySelectorAll<HTMLElement>('.post-card'));
+      const update = () => {
+        const step = cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : track.clientWidth;
+        const index = Math.min(cards.length - 1, Math.max(0, Math.round(track.scrollLeft / step)));
+        previous.disabled = track.scrollLeft <= 2;
+        next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+        position.textContent = `${index + 1} / ${cards.length}`;
+      };
+      const move = (direction: number) => {
+        const step = cards[1].offsetLeft - cards[0].offsetLeft;
+        track.scrollBy({ left: direction * step, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+      };
+      previous.addEventListener('click', () => move(-1), options);
+      next.addEventListener('click', () => move(1), options);
+      track.addEventListener('scroll', update, options);
+      track.addEventListener('keydown', (event) => {
+        if (event.target !== track || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+        event.preventDefault();
+        move(event.key === 'ArrowLeft' ? -1 : 1);
+      }, options);
+      const observer = new ResizeObserver(update);
+      observer.observe(track);
+      update();
+      this.cleanup = () => { controller.abort(); observer.disconnect(); };
+    }
+    disconnectedCallback() { this.cleanup?.(); }
+  }
+  if (!customElements.get('post-carousel')) customElements.define('post-carousel', PostCarousel);
+</script>
