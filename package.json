@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "card:render": "node scripts/render-profile-card.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -18,5 +19,8 @@
     "@astrojs/sitemap": "^3.7.3",
     "astro": "^7.2.4",
     "sharp": "^0.35.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.65.1"
   }
 }
